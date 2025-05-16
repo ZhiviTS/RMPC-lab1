@@ -1,0 +1,82 @@
+from math import pi
+import numpy as np
+import roboticstoolbox as rtb
+import matplotlib.pyplot as plt
+
+robot = rtb.models.DH.Puma560()
+print(robot)
+
+robot.links[0].m = 20
+robot.links[1].m = 17.4
+robot.links[2].m = 4.8
+robot.links[3].m = 0.82
+robot.links[4].m = 0.34
+robot.links[5].m = 0.09
+
+robot.links[0].r = [0, 0, 0]
+robot.links[1].r = [-0.3638, 0.006, 0.2275]
+robot.links[2].r = [-0.0203, -0.0141, 0.07]
+robot.links[3].r = [0, 0.019, 0]
+robot.links[4].r = [0, 0, 0]
+robot.links[5].r = [0, 0, 0.032]
+
+robot.links[0].I = [0, 0.35, 0, 0, 0, 0]
+robot.links[1].I = [0.13, 0.524, 0.539, 0, 0, 0]
+robot.links[2].I = [0.066, 0.086, 0.0125, 0, 0, 0]
+robot.links[3].I = [0.0018, 0.0013, 0.0018, 0, 0, 0]
+robot.links[4].I = [0.0003, 0.0004, 0.0003, 0, 0, 0]
+robot.links[5].I = [0.00015, 0.00015, 0.00004, 0, 0, 0]
+
+robot.links[0].Jm = 0.0004
+robot.links[1].Jm = 0.0004
+robot.links[2].Jm = 0.0004
+robot.links[3].Jm = 0.000033
+robot.links[4].Jm = 0.000033
+robot.links[5].Jm = 0.000033
+
+robot.links[0].B = 0.0015
+robot.links[1].B = 0.000817
+robot.links[2].B = 0.00138
+robot.links[3].B = 0.0000712
+robot.links[4].B = 0.0000826
+robot.links[5].B = 0.0000367
+
+robot.links[0].Tc = [0.395, -0.435]
+robot.links[1].Tc = [0.126, -0.071]
+robot.links[2].Tc = [0.132, -0.105]
+robot.links[3].Tc = [0.0112, -0.0169]
+robot.links[4].Tc = [0.00926, -0.0145]
+robot.links[5].Tc = [0.00396, -0.0105]
+
+robot.links[0].G = -62.6111
+robot.links[1].G = 107.8150000000000
+robot.links[2].G = -53.7063
+robot.links[3].G = 76.0364
+robot.links[4].G = 71.923
+robot.links[5].G = 76.686
+
+robot.links[0].qlim = [-2.792526803190927, 2.792526803190927]
+robot.links[1].qlim = [-0.785398163397448, 3.926990816987241]
+robot.links[2].qlim = [-3.926990816987241, 0.785398163397448]
+robot.links[3].qlim = [-1.919862177193763, 2.967059728390360]
+robot.links[4].qlim = [-1.745329251994330, 1.745329251994330]
+robot.links[5].qlim = [-4.642575810304916, 4.642575810304916]
+
+q_start = [0, 0, 0, 0, 0, 0]
+robot.plot(q_start)
+plt.show()
+
+q_end = [pi/4, -pi/3, -pi/4, pi/3, -pi/3, pi/4]
+robot.plot(q_end)
+plt.show()
+
+N = 100
+t_start = 0
+t_stop = 5
+t_shag = t_stop/N
+time = np.arange(t_start, t_stop, t_shag)
+tr = rtb.jtraj(q_start, q_end, time)
+
+tau = robot.rne(tr.q, tr.qd, tr.qdd).T  # Тут транспонируем, ибо так проще графики строить
+
+tau0 = robot.rne(tr.q, np.zeros([N,6]), np.zeros([N,6])).T # Тут транспонируем, ибо так проще графики строить
