@@ -14,5 +14,6 @@ Assignment
 + zero velocities and accelerations $\dot{q} = 0, \ddot{q} = 0$ - maintaining a given position;
 6. Determine the numerical values ​​of the elements of the matrices $M(q), C(q, \dot{q}), G(q)$ at each calculated moment of time.
 7. Plot graphs of the moments of the manipulator links along the trajectory for each scenario (see point #5).
-8. Create a report in .ipynb format, with detailed comments. Conclusions are formulated based on the results of the work.
+8. Create a report in .ipynb format, with detailed comments.
+9. All steps and conclusions are formulated based on the results of the work in README.md
   
