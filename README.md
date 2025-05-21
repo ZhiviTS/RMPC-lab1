@@ -4,7 +4,7 @@ First laboratory work for course Robot Motion Planning and Control.
 
 Assignment
 
-1. For the selected robot option, load the manipulator model from the toolbox different then Puma560 and output the Denavit-Hartenberg parameters.
+1. For the selected robot option, load the manipulator model from the toolbox **different then Puma560** and output the Denavit-Hartenberg parameters.
 2. Specify the masses of the links, the positions of their centers of mass, the tensors of inertia, the moments of inertia of the drives, the coefficients of viscous friction of the drives, the coefficients of Coulomb friction of the drives, the gear ratios of the reducers and the constraints on the generalized coordinates. It is recommended to refer to the data sheets of the manipulators used.
 3. Specify and display arbitrary initial and final configurations of the robot.
 4. Plan a trajectory between the specified configurations.
